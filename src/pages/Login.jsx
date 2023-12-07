@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useLogin } from "../hooks/useLogin";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { login, error, isLoading } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(username, password);
+    await login(username, password);
   };
 
   return (
@@ -54,6 +56,7 @@ export const Login = () => {
           <button
             className="bg-gray-500 hover:bg-gray-700 active:bg-gray-900 text-white font-bold py-2 px-4 rounded"
             type="submit"
+            disabled={isLoading}
           >
             Log In
           </button>
@@ -61,6 +64,7 @@ export const Login = () => {
         <p className="text-center text-gray-500 text-xs mt-6">
           No account? <Link to={"/signup"}>Sign up here</Link>
         </p>
+        {error && <p>{error}</p>}
       </form>
     </div>
   );
