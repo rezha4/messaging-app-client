@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
+import { useSignup } from "../hooks/useSignup";
 
 export const Signup = () => {
-  const [user, setUser] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const { signup, error, isLoading } = useSignup();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password != passwordConfirmation) {
+      console.log("Pass dnt match");
+    } else {
+      await signup(username, password);
+      console.log(username, password);
+    }
   };
+
   return (
     <div className="flex justify-center items-center h-[90vh]">
       <form
@@ -26,6 +36,8 @@ export const Signup = () => {
             type="text"
             placeholder="Username"
             name="username"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
           />
         </div>
         <div className="mb-1">
@@ -41,6 +53,8 @@ export const Signup = () => {
             type="password"
             placeholder="Password"
             name="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
         </div>
         <div className="mb-6">
@@ -56,16 +70,22 @@ export const Signup = () => {
             type="password"
             placeholder="Password"
             name="reconfirmPassword"
+            //TODO
+            //reconfirm logic
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+            value={passwordConfirmation}
           />
         </div>
         <div className="flex items-center justify-between">
           <button
             className="bg-gray-500 hover:bg-gray-700 active:bg-gray-900 text-white font-bold py-2 px-4 rounded"
-            type="button"
+            type="submit"
+            disabled={isLoading}
           >
             Sign Up
           </button>
         </div>
+        {error && <div>{error}</div>}
       </form>
     </div>
   );

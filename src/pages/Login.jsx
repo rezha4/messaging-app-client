@@ -1,9 +1,15 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
-  const handleSubmit = (e) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(username, password);
   };
+
   return (
     <div className="flex justify-center items-center h-[90vh]">
       <form
@@ -23,6 +29,8 @@ export const Login = () => {
             type="text"
             placeholder="Username"
             name="username"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
           />
         </div>
         <div className="mb-6">
@@ -38,12 +46,14 @@ export const Login = () => {
             type="password"
             placeholder="Password"
             name="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
         </div>
         <div className="flex items-center justify-between">
           <button
             className="bg-gray-500 hover:bg-gray-700 active:bg-gray-900 text-white font-bold py-2 px-4 rounded"
-            type="button"
+            type="submit"
           >
             Log In
           </button>
