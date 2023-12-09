@@ -9,13 +9,23 @@ import { useEffect, useState } from "react";
 function Root() {
   const { user } = useAuthContext();
   const [messages, setMessages] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const fetchMessages = async () => {
     try {
       const response = await fetch("http://localhost:3000/messages");
       const data = await response.json();
-      console.log(data)
       setMessages(data.messages);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/users");
+      const data = await response.json();
+      setUsers(data.users);
     } catch (error) {
       console.error(error);
     }
@@ -23,6 +33,7 @@ function Root() {
 
   useEffect(() => {
     fetchMessages();
+    fetchUsers();
   }, []);
 
   const contactClass = "text-xl p-3 m-3 border-b-2";
@@ -35,7 +46,11 @@ function Root() {
           <main className="flex">
             <aside className="w-[25vw] h-[90vh] overflow-y-auto border-r-2">
               <div>
-                <h1 className={contactClass}>Username</h1>
+                {
+                  users.map(user => (
+                    <p key={user._id} className={contactClass}>{user.username}</p>
+                  ))
+                }
               </div>
             </aside>
             <section className="w-[75vw] h-[90vh] flex flex-col">
