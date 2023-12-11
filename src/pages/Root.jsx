@@ -1,10 +1,9 @@
-import { Login } from "./pages/Login";
-import "./index.css";
-import { Navbar } from "./components/Navbar";
-import { Signup } from "./pages/Signup";
-import { useAuthContext } from "./hooks/useAuthContext";
+import "../index.css";
+import { Navbar } from "../components/Navbar";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Login } from "./Login";
 
 function Root() {
   const { user } = useAuthContext();
@@ -12,12 +11,14 @@ function Root() {
   const [users, setUsers] = useState([]);
   const [receiver, setReceiver] = useState("");
   const [message, setMessage] = useState("");
+  const [active, setActive] = useState(false);
 
   const fetchMessages = async () => {
     try {
       const url = `http://localhost:3000/messages?sender=${user.user._id}&receiver=${receiver}`;
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data);
       setMessages(data.messages);
     } catch (error) {
       console.error(error);
@@ -34,13 +35,16 @@ function Root() {
     }
   };
 
-  const postMessages = async () => {
+  const postMessages = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch("http://localhost:3000/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sender: user.user._id, receiver, message }),
       });
+      fetchMessages();
+      setMessage("");
     } catch (error) {
       console.error(error);
     }
@@ -50,14 +54,21 @@ function Root() {
     fetchUsers();
   }, []);
 
+  useEffect(() => {
+    if (receiver) {
+      fetchMessages();
+    }
+  }, [receiver]);
+
   const handleUserClick = (id) => {
     setReceiver(id);
-    fetchMessages();
-    console.log(user.user._id);
-    console.log(receiver);
   };
 
-  const contactClass = "text-xl p-3 m-3 border-b-2";
+  const determineClass = (userid) => {
+    return userid === receiver
+      ? "bg-gray-200 shadow-xl text-center text-xl p-3 my-3 border-b-2 cursor-pointer hover:bg-gray-200 hover:shadow-xl transition duration-300"
+      : "text-center text-xl p-3 my-3 border-b-2 cursor-pointer hover:bg-gray-200 hover:shadow-xl";
+  };
   const messageClass = "p-2 m-2 max-w-lg w-fit bg-green-400 rounded";
   return (
     <>
@@ -66,29 +77,38 @@ function Root() {
         <>
           <main className="flex">
             <aside className="w-[25vw] h-[90vh] overflow-y-auto border-r-2">
-              <div>
-                {users.map((user) => (
-                  <p
-                    key={user._id}
-                    className={contactClass}
-                    onClick={() => handleUserClick(user._id)}
-                  >
-                    {user.username}
-                  </p>
-                ))}
-              </div>
+              {users.map((user) => (
+                <div
+                  key={user._id}
+                  className={determineClass(user._id)}
+                  onClick={() => {
+                    handleUserClick(user._id);
+                  }}
+                >
+                  <p>{user.username}</p>
+                </div>
+              ))}
             </aside>
             <section className="w-[75vw] h-[90vh] flex flex-col">
               <div className="h-[90vh] overflow-y-auto">
                 {messages.map((message) => (
-                  <p key={message._id} className={messageClass}>
+                  <p
+                    key={message._id}
+                    className={`${messageClass} ${
+                      user.user._id === message.sender
+                        ? "bg-blue-400 text-white rounded-l-none rounded"
+                        : "bg-green-400 text-black rounded-r-none rounded"
+                    }`}
+                  >
                     {message.message}
                   </p>
                 ))}
               </div>
               <div className="w-[100%] h-[10vh] border-t-2">
                 <form
-                  onSubmit={postMessages}
+                  onSubmit={(e) => {
+                    postMessages(e);
+                  }}
                   className="h-[100%] flex justify-center items-center gap-0.5"
                 >
                   <button
@@ -101,6 +121,7 @@ function Root() {
                     type="text"
                     name="message"
                     className="border border-black w-[90%] h-[70%] rounded-md"
+                    value={message}
                     onChange={(e) => setMessage(e.target.value)}
                   />
                 </form>
@@ -109,12 +130,7 @@ function Root() {
           </main>
         </>
       ) : (
-        <div className="text-center mt-8">
-          <p>Please login to see content:</p>
-          <Link to={"/login"} className="text-2xl underline">
-            Login
-          </Link>
-        </div>
+        <Login />
       )}
     </>
   );
