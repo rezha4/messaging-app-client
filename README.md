@@ -34,6 +34,8 @@ I started working on the express API first. After it can do READ process, I star
 
 I didn't do testing at all, and I regret it. I skipped the testing lessons all around TOP, except the first one (on advanced JS with Jest). This introduces unexpected bugs around my app, and it delays deployment by a lot.
 
+This project took me about 14 hours to complete (around 1 week, 2 hours commited daily).
+
 # Acknowledgments
 Special thanks to The Odin Project for the guidance and resources provided throughout this project.
 
