@@ -15,10 +15,9 @@ function Root() {
 
   const fetchMessages = async () => {
     try {
-      const url = `https://messaging-app-byrezha.adaptable.app//messages?sender=${user.user._id}&receiver=${receiver}`;
+      const url = `http://localhost:3000/messages?sender=${user.user._id}&receiver=${receiver}`;
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
       setMessages(data.messages);
     } catch (error) {
       console.error(error);
@@ -27,7 +26,7 @@ function Root() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("https://messaging-app-byrezha.adaptable.app/users");
+      const response = await fetch("http://localhost:3000/users");
       const data = await response.json();
       setUsers(data.users);
     } catch (error) {
@@ -38,7 +37,7 @@ function Root() {
   const postMessages = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://messaging-app-byrezha.adaptable.app/messages", {
+      const response = await fetch("http://localhost:3000/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sender: user.user._id, receiver, message }),
@@ -69,7 +68,7 @@ function Root() {
       ? "bg-gray-200 shadow-xl text-center text-xl p-3 my-3 border-b-2 cursor-pointer hover:bg-gray-200 hover:shadow-xl transition duration-300"
       : "text-center text-xl p-3 my-3 border-b-2 cursor-pointer hover:bg-gray-200 hover:shadow-xl";
   };
-  const messageClass = "p-2 m-2 max-w-lg w-fit bg-green-400 rounded";
+  const messageClass = "p-2 m-2 w-fit bg-green-400 rounded";
   return (
     <>
       <Navbar />
@@ -90,14 +89,14 @@ function Root() {
               ))}
             </aside>
             <section className="w-[75vw] h-[90vh] flex flex-col">
-              <div className="h-[90vh] overflow-y-auto">
+              <div className="h-[90vh] overflow-y-auto flex flex-col">
                 {messages.map((message) => (
                   <p
                     key={message._id}
                     className={`${messageClass} ${
                       user.user._id === message.sender
-                        ? "bg-blue-400 text-white rounded-l-none rounded"
-                        : "bg-green-400 text-black rounded-r-none rounded"
+                        ? "bg-blue-500 text-white rounded-l-none rounded"
+                        : "bg-green-400 text-black rounded-r-none rounded self-end"
                     }`}
                   >
                     {message.message}
