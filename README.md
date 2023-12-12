@@ -1,8 +1,8 @@
 # Messaging App
 
-Backend API repo: <a href="https://github.com/rezha4/messaging-app/" target="_blank" rel="noopener noreferrer">Github - Messaging-App</a>
+Backend API repo: https://github.com/rezha4/messaging-app/
 
-Live: <a href="https://playful-youtiao-23f51a.netlify.app/" target="_blank" rel="noopener noreferrer">Messaging App - Netlify</a>
+Live: https://playful-youtiao-23f51a.netlify.app/
 
 Preview:
 ![Alt text](image.png)
