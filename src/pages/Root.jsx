@@ -16,7 +16,7 @@ function Root() {
 
   const fetchMessages = async () => {
     try {
-      const url = `http://localhost:3000/messages?sender=${user.user._id}&receiver=${receiver}`;
+      const url = `https://messaging-app-byrezha.adaptable.app/messages?sender=${user.user._id}&receiver=${receiver}`;
       const response = await fetch(url);
       const data = await response.json();
       setMessages(data.messages);
@@ -27,7 +27,7 @@ function Root() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:3000/users");
+      const response = await fetch("https://messaging-app-byrezha.adaptable.app/users");
       const data = await response.json();
       setUsers(data.users);
     } catch (error) {
@@ -38,7 +38,7 @@ function Root() {
   const postMessages = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/messages", {
+      const response = await fetch("https://messaging-app-byrezha.adaptable.app/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sender: user.user._id, receiver, message }),
