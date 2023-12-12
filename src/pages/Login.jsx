@@ -13,7 +13,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-[90vh]">
+    <div className="flex justify-center items-center h-[85vh]">
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-80"
         onSubmit={handleSubmit}
@@ -61,8 +61,8 @@ export const Login = () => {
             Log In
           </button>
         </div>
-        <p className="text-center text-gray-500 text-xs mt-6">
-          No account? <Link to={"/signup"}>Sign up here</Link>
+        <p className="text-center text-gray-500 text-xs mt-6 ">
+          No account? <Link to={"/signup"} className="hover:text-blue-500">Sign up here</Link>
         </p>
         {error && <p>{error}</p>}
       </form>

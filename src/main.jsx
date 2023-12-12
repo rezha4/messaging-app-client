@@ -7,6 +7,7 @@ import { Login } from "./pages/Login.jsx";
 import { Signup } from "./pages/Signup.jsx";
 import { Navbar } from "./components/Navbar.jsx";
 import { AuthContextProvider } from "./contexts/AuthContext.jsx";
+import { Footer } from "./components/Footer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Signup />
+        <Footer />
       </>
     ),
   },

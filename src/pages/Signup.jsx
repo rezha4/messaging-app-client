@@ -30,7 +30,7 @@ export const Signup = () => {
       ) : (
         <>
           <Navbar />
-          <div className="flex justify-center items-center h-[90vh]">
+          <div className="flex justify-center items-center h-[85vh]">
             <form
               className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-80"
               onSubmit={handleSubmit}

@@ -4,6 +4,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Login } from "./Login";
+import { Footer } from "../components/Footer";
 
 function Root() {
   const { user } = useAuthContext();
@@ -75,7 +76,7 @@ function Root() {
       {user ? (
         <>
           <main className="flex">
-            <aside className="w-[25vw] h-[90vh] overflow-y-auto border-r-2">
+            <aside className="w-[25vw] h-[85vh] overflow-y-auto border-r-2">
               {users.map((user) => (
                 <div
                   key={user._id}
@@ -88,15 +89,15 @@ function Root() {
                 </div>
               ))}
             </aside>
-            <section className="w-[75vw] h-[90vh] flex flex-col">
-              <div className="h-[90vh] overflow-y-auto flex flex-col">
+            <section className="w-[75vw] h-[85vh] flex flex-col">
+              <div className="h-[85vh] overflow-y-auto flex flex-col">
                 {messages.map((message) => (
                   <p
                     key={message._id}
                     className={`${messageClass} ${
                       user.user._id === message.sender
-                        ? "bg-blue-500 text-white rounded-l-none rounded"
-                        : "bg-green-400 text-black rounded-r-none rounded self-end"
+                        ? "bg-blue-300 rounded-l-none rounded"
+                        : "bg-green-400 rounded-r-none rounded self-end"
                     }`}
                   >
                     {message.message}
@@ -111,7 +112,7 @@ function Root() {
                   className="h-[100%] flex justify-center items-center gap-0.5"
                 >
                   <button
-                    className="border p-2 border-black rounded"
+                    className="border p-2 border-black rounded hover:bg-gray-200"
                     type="submit"
                   >
                     Send
@@ -119,7 +120,7 @@ function Root() {
                   <input
                     type="text"
                     name="message"
-                    className="border border-black w-[90%] h-[70%] rounded-md"
+                    className="border border-black w-[90%] h-[70%] rounded-md p-2 text-xl"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                   />
@@ -131,6 +132,7 @@ function Root() {
       ) : (
         <Login />
       )}
+      <Footer />
     </>
   );
 }
