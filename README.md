@@ -20,8 +20,6 @@ Preview:
 
 - ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-- ![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
-
 # Overview
 
 I made this project according to The Odin Project (TOP) Node JS, Full Stack Project's section: https://www.theodinproject.com/lessons/nodejs-messaging-app
