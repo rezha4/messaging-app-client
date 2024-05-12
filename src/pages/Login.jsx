@@ -62,8 +62,9 @@ export const Login = () => {
           </button>
         </div>
         <p className="text-center text-gray-500 text-xs mt-6 ">
-          No account? <Link to={"/signup"} className="hover:text-blue-500">Sign up here</Link>
+          No account? <Link to={"/signup"} className="hover:text-blue-500 text-underline">Sign up here</Link>
         </p>
+        <p className="text-center text-gray-500 text-xs mt-6">Need a quick demo? login with this credential: user: user, password: password</p>
         {error && <p>{error}</p>}
       </form>
     </div>
