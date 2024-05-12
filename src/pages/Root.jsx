@@ -69,7 +69,7 @@ function Root() {
       ? "bg-gray-200 shadow-xl text-center text-xl p-3 my-3 border-b-2 cursor-pointer hover:bg-gray-200 hover:shadow-xl transition duration-300"
       : "text-center text-xl p-3 my-3 border-b-2 cursor-pointer hover:bg-gray-200 hover:shadow-xl";
   };
-  const messageClass = "p-2 m-2 w-fit bg-green-400 rounded";
+  const messageClass = "p-2 m-2 w-fit";
   return (
     <>
       <Navbar />
