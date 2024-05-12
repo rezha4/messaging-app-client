@@ -1,8 +1,8 @@
 # Messaging App
 
-Backend API repo: https://github.com/rezha4/messaging-app/
-
 Live: https://playful-youtiao-23f51a.netlify.app/
+
+Backend API repo: https://github.com/rezha4/messaging-app/
 
 Preview:
 ![Alt text](image.png)
