@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
     <footer className="text-xs text-gray-400 flex justify-around items-center pt-2 border-t-2">
-      <p>made with ❤️ by rezha, for odin project - 12/2023 (WIP)</p>
+      <p>made with ❤️ by rezha, for odin project - 12/2023</p>
       <a
         href="https://github.com/rezha4/messaging-app-client"
         target="_blank"
